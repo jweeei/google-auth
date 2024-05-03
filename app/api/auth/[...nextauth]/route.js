@@ -20,7 +20,7 @@ const authOptions = {
 
           if (!userExists) {
             const res = await fetch(
-              'https://google-auth-puce.vercel.app/api/user',
+              'https://www.google-auth-m28z.vercel.app/api/user',
               {
                 method: 'POST',
                 headers: {
