@@ -19,7 +19,7 @@ const authOptions = {
           const userExists = await User.findOne({ email })
 
           if (!userExists) {
-            const res = await fetch('http://localhost/api/user', {
+            const res = await fetch('https://third-gold.vercel.app/api/third', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
