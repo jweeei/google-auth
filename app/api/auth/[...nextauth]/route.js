@@ -19,7 +19,7 @@ const authOptions = {
           const userExists = await User.findOne({ email })
 
           if (!userExists) {
-            const res = await fetch('https://third-gold.vercel.app/api/third', {
+            const res = await fetch(`${process.env.NEXTAUTH_URL}/api/user`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -42,7 +42,6 @@ const authOptions = {
       return user
     },
   },
-  secret: process.env.NEXTAUTH_SECRET,
 }
 
 const handler = NextAuth(authOptions)
