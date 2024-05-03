@@ -20,7 +20,7 @@ const authOptions = {
 
           if (!userExists) {
             const res = await fetch(
-              'https://auth-psi-three.vercel.app/api/user',
+              'https://third-green.vercel.app/api/third',
               {
                 method: 'POST',
                 headers: {
