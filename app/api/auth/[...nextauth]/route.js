@@ -20,7 +20,7 @@ const authOptions = {
 
           if (!userExists) {
             const res = await fetch(
-              'https://www.google-auth-m28z.vercel.app/api/user',
+              'https://auth-psi-three.vercel.app/api/user',
               {
                 method: 'POST',
                 headers: {
