@@ -1,7 +1,7 @@
-import { connectMongoDB } from "@/lib/mongodb";
-import User from "@/models/user";
-import NextAuth from "next-auth/next";
-import GoogleProvider from "next-auth/providers/google";
+import { connectMongoDB } from '@/lib/mongodb'
+import User from '@/models/user'
+import NextAuth from 'next-auth/next'
+import GoogleProvider from 'next-auth/providers/google'
 
 const authOptions = {
   providers: [
@@ -12,38 +12,41 @@ const authOptions = {
   ],
   callbacks: {
     async signIn({ user, account }) {
-      if (account.provider === "google") {
-        const { name, email } = user;
+      if (account.provider === 'google') {
+        const { name, email } = user
         try {
-          await connectMongoDB();
-          const userExists = await User.findOne({ email });
+          await connectMongoDB()
+          const userExists = await User.findOne({ email })
 
           if (!userExists) {
-            const res = await fetch("http://localhost:3000/api/user", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                name,
-                email,
-              }),
-            });
+            const res = await fetch(
+              'https://google-auth-puce.vercel.app/api/user',
+              {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  name,
+                  email,
+                }),
+              }
+            )
 
             if (res.ok) {
-              return user;
+              return user
             }
           }
         } catch (error) {
-          console.log(error);
+          console.log(error)
         }
       }
 
-      return user;
+      return user
     },
   },
-};
+}
 
-const handler = NextAuth(authOptions);
+const handler = NextAuth(authOptions)
 
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST }
